@@ -7,7 +7,7 @@ class DepStarSort(unittest.TestCase):
   def tearDown(self) -> None:
       pass
 
-  def test_normal(self):
+  def test_dep_url(self):
     self.assertEqual(1, 1)
 
 
