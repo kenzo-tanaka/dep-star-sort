@@ -1,10 +1,6 @@
 import unittest
 import dep_star_sort
 
-class DepStarSort:
-    def dep_url(self, url):
-        return(f"{url}/network/dependents")
-
 class DepStarSortTest(unittest.TestCase):
   def setUp(self) -> None:
       pass
@@ -13,8 +9,8 @@ class DepStarSortTest(unittest.TestCase):
       pass
 
   def test_dep_url(self):
-    dep_star_sort = DepStarSort()
-    self.assertEqual(dep_star_sort.dep_url("https://github.com/github/view_component"), "https://github.com/github/view_component/network/dependents")
+    executor = dep_star_sort.DepStarSort()
+    self.assertEqual(executor.dep_url("https://github.com/github/view_component"), "https://github.com/github/view_component/network/dependents")
 
 
 if __name__ == "__main__":
