@@ -9,11 +9,11 @@ class DepStarSortTest(unittest.TestCase):
       pass
 
   def test_dep_url(self):
-      executor = dep_star_sort.DepStarSort()
-      self.assertEqual(executor.dep_url("https://github.com/github/view_component"), "https://github.com/github/view_component/network/dependents")
+      executor = dep_star_sort.DepStarSort("https://github.com/github/view_component")
+      self.assertEqual(executor.dep_url(), "https://github.com/github/view_component/network/dependents")
 
   def test_response_code(self):
-      executor = dep_star_sort.DepStarSort()
+      executor = dep_star_sort.DepStarSort("https://github.com/github/view_component")
       self.assertEqual(executor.response_code(), 200)
 
 
