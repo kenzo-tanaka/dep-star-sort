@@ -6,4 +6,7 @@ class DepStarSort:
         return(f"{url}/network/dependents")
     
     def get_html(self):
-        return("<!DOCTYPE html>")
+        url = self.dep_url("https://github.com/github/view_component")
+        html = requests.get(url)
+        soup = BeautifulSoup(html.content, "html.parser")
+        return(soup)
