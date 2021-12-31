@@ -1,6 +1,6 @@
 import unittest
 
-class DepStarSort(unittest.TestCase):
+class DepStarSortTest(unittest.TestCase):
   def setUp(self) -> None:
       pass
 
