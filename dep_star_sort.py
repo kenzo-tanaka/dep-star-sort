@@ -11,9 +11,7 @@ class DepStarSort:
     def response_code(self):
         return(requests.get(self.dep_url()).status_code)
     
-    # WIP
-    # def get_html(self):
-    #     url = self.dep_url("https://github.com/github/view_component")
-    #     html = requests.get(url)
-    #     soup = BeautifulSoup(html.content, "html.parser")
-    #     return(soup.find('title'))
+    def get_repo_href(self):
+        html = requests.get(self.dep_url())
+        soup = BeautifulSoup(html.content, "html.parser")
+        return(soup.find(class_="Box-row").find_all('a')[1]['href'])
