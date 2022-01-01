@@ -9,16 +9,12 @@ class DepStarSort:
         self.min_star = min_star
     
     def popular_repos(self):
-        return([
-            {
-                'repo': 'https://github.com/ledermann/templatus-hotwire',
-                'star': 6,
-            },
-            {
-                'repo': 'https://github.com/ParamagicDev/rails_starter',
-                'star': 5
-            }
-        ])
+        url = self.dep_url
+        result = []
+        while url != None:
+            result += self.evaluate_repos(url)
+            url = self.next_page_link(url)
+        return(result)
 
     def next_page_link(self, url):
         page_links = self.soup(url).find(attrs={"data-test-selector": "pagination"}).find_all('a')
@@ -51,3 +47,4 @@ class DepStarSort:
 if __name__ == "__main__":
     args = sys.argv
     dep_star_sort = DepStarSort(github_url=args[1], min_star=int(args[2]))
+    print(dep_star_sort.popular_repos())

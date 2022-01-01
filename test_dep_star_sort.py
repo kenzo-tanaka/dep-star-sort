@@ -17,6 +17,9 @@ class DepStarSortTest(unittest.TestCase):
         with open('index.html') as f:
             return(BeautifulSoup(f, "html.parser"))
 
+    def _mock_next_page_link(self, url):
+        return(None)
+
     @mock.patch("dep_star_sort.DepStarSort.soup", new=_mock_soup)
     def test_evaluate_repos(self):
         expect = [
@@ -35,6 +38,8 @@ class DepStarSortTest(unittest.TestCase):
     def test_next_page_link(self):
         self.assertEqual(self.executor.next_page_link(url='https://github.com/github/view_component/network/dependents'), "https://github.com/github/view_component/network/dependents?dependents_after=MTgzNjk2NDY2MDM")
     
+    @mock.patch("dep_star_sort.DepStarSort.soup", new=_mock_soup)
+    @mock.patch("dep_star_sort.DepStarSort.next_page_link", new=_mock_next_page_link)
     def test_popular_repos(self):
         expect = [
             {
