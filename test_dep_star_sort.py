@@ -14,9 +14,6 @@ class DepStarSortTest(unittest.TestCase):
         with open('index.html') as f:
             return(BeautifulSoup(f, "html.parser"))
 
-    def test_dep_url(self):
-        self.assertEqual(self.executor.dep_url(), "https://github.com/github/view_component/network/dependents")
-
     @mock.patch("dep_star_sort.DepStarSort.get_soup", new=_mock_get_soup)
     def test_evaluate_repos(self):
         expect = [{

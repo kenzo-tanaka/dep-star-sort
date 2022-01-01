@@ -4,9 +4,7 @@ from bs4 import BeautifulSoup
 class DepStarSort:
     def __init__(self, github_url) -> None:
         self.github_url = github_url
-
-    def dep_url(self):
-        return(f"{self.github_url}/network/dependents")
+        self.dep_url = f"{self.github_url}/network/dependents"
     
     def evaluate_repos(self, min_star):
         result = []
@@ -25,5 +23,5 @@ class DepStarSort:
 
     # TODO: private
     def get_soup(self):
-        html = requests.get(self.dep_url())
+        html = requests.get(self.dep_url)
         return(BeautifulSoup(html.content, "html.parser"))
