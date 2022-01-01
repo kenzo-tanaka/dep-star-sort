@@ -7,9 +7,8 @@ class DepStarSort:
         self.github_url = github_url
         self.dep_url = f"{self.github_url}/network/dependents"
 
-    def next_page_link(self):
-        # TODO: self.dep_url ではなく、ここも引数から受け取って渡す
-        page_links = self.soup(self.dep_url).find(attrs={"data-test-selector": "pagination"}).find_all('a')
+    def next_page_link(self, url):
+        page_links = self.soup(url).find(attrs={"data-test-selector": "pagination"}).find_all('a')
         # Nextリンクのみ
         if len(page_links) == 1:
             return(page_links[0]['href'])
