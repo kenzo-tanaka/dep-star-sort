@@ -32,5 +32,19 @@ class DepStarSortTest(unittest.TestCase):
     def test_next_page_link(self):
         self.assertEqual(self.executor.next_page_link(url='https://github.com/github/view_component/network/dependents'), "https://github.com/github/view_component/network/dependents?dependents_after=MTgzNjk2NDY2MDM")
 
+    
+    def test_popular_repos(self):
+        expect = [
+            {
+                'repo': 'https://github.com/ledermann/templatus-hotwire',
+                'star': 6,
+            },
+            {
+                'repo': 'https://github.com/ParamagicDev/rails_starter',
+                'star': 5
+            }
+        ]
+        self.assertEqual(self.executor.popular_repos(), expect)
+
 if __name__ == "__main__":
     unittest.main()

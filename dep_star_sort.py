@@ -6,6 +6,18 @@ class DepStarSort:
     def __init__(self, github_url) -> None:
         self.github_url = github_url
         self.dep_url = f"{self.github_url}/network/dependents"
+    
+    def popular_repos(self):
+        return([
+            {
+                'repo': 'https://github.com/ledermann/templatus-hotwire',
+                'star': 6,
+            },
+            {
+                'repo': 'https://github.com/ParamagicDev/rails_starter',
+                'star': 5
+            }
+        ])
 
     def next_page_link(self, url):
         page_links = self.soup(url).find(attrs={"data-test-selector": "pagination"}).find_all('a')
@@ -28,7 +40,6 @@ class DepStarSort:
                         'star': star
                     }
                 )
-            
         return(result)
 
     # TODO: private
