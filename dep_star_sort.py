@@ -3,9 +3,10 @@ import requests
 from bs4 import BeautifulSoup
 
 class DepStarSort:
-    def __init__(self, github_url) -> None:
+    def __init__(self, github_url, min_star) -> None:
         self.github_url = github_url
         self.dep_url = f"{self.github_url}/network/dependents"
+        self.min_star = min_star
     
     def popular_repos(self):
         return([
@@ -28,12 +29,12 @@ class DepStarSort:
         else:
             return(page_links[1]['href'])
     
-    def evaluate_repos(self, min_star, url):
+    def evaluate_repos(self, url):
         result = []
         for box in self.soup(url).find_all(class_="Box-row"):
             repo = 'https://github.com' + box.find_all('a')[1]['href']
             star = int(box.find(class_='octicon-star').parent.text.replace('\n','').strip())
-            if star >= min_star:
+            if star >= self.min_star:
                 result.append(
                     {
                         'repo': repo,
@@ -49,5 +50,4 @@ class DepStarSort:
 
 if __name__ == "__main__":
     args = sys.argv
-    dep_star_sort = DepStarSort(args[1])
-    print(dep_star_sort.evaluate_repos(int(args[2])))
+    dep_star_sort = DepStarSort(github_url=args[1], min_star=int(args[2]))

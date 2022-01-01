@@ -5,7 +5,10 @@ from bs4 import BeautifulSoup
 
 class DepStarSortTest(unittest.TestCase):
     def setUp(self) -> None:
-      self.executor = dep_star_sort.DepStarSort("https://github.com/github/view_component")
+      self.executor = dep_star_sort.DepStarSort(
+                        github_url="https://github.com/github/view_component",
+                        min_star=5
+                    )
 
     def tearDown(self) -> None:
         pass
@@ -26,12 +29,11 @@ class DepStarSortTest(unittest.TestCase):
                 'star': 5
             }
         ]
-        self.assertEqual(self.executor.evaluate_repos(min_star=5, url='https://github.com/github/view_component/network/dependents'), expect)
+        self.assertEqual(self.executor.evaluate_repos(url='https://github.com/github/view_component/network/dependents'), expect)
 
     @mock.patch("dep_star_sort.DepStarSort.soup", new=_mock_soup)
     def test_next_page_link(self):
         self.assertEqual(self.executor.next_page_link(url='https://github.com/github/view_component/network/dependents'), "https://github.com/github/view_component/network/dependents?dependents_after=MTgzNjk2NDY2MDM")
-
     
     def test_popular_repos(self):
         expect = [
