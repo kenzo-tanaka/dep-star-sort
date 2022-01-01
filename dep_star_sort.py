@@ -1,3 +1,4 @@
+import sys
 import requests
 from bs4 import BeautifulSoup
 
@@ -25,3 +26,8 @@ class DepStarSort:
     def get_soup(self):
         html = requests.get(self.dep_url)
         return(BeautifulSoup(html.content, "html.parser"))
+
+if __name__ == "__main__":
+    args = sys.argv
+    dep_star_sort = DepStarSort(args[1])
+    print(dep_star_sort.evaluate_repos(int(args[2])))
