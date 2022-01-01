@@ -8,7 +8,13 @@ class DepStarSort:
         self.dep_url = f"{self.github_url}/network/dependents"
 
     def next_page_link(self):
-        return(self.get_soup().find(attrs={"data-test-selector": "pagination"}).find('a')['href'])
+        page_links = self.get_soup().find(attrs={"data-test-selector": "pagination"}).find_all('a')
+        # Nextリンクのみ
+        if len(page_links) == 1:
+            return(page_links[0]['href'])
+        # Prevリンクもある
+        else:
+            return(page_links[1]['href'])
     
     def evaluate_repos(self, min_star):
         result = []
