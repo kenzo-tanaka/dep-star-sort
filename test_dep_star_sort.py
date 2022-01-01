@@ -17,17 +17,7 @@ class DepStarSortTest(unittest.TestCase):
     def test_dep_url(self):
         self.assertEqual(self.executor.dep_url(), "https://github.com/github/view_component/network/dependents")
 
-    def test_response_code(self):
-        self.assertEqual(self.executor.response_code(), 200)
-
     @mock.patch("dep_star_sort.DepStarSort.get_soup", new=_mock_get_soup)
-    def test_get_repo_href(self):
-        self.assertEqual(self.executor.get_repo_href(), "/ledermann/templatus-hotwire")
-
-    @mock.patch("dep_star_sort.DepStarSort.get_soup", new=_mock_get_soup)
-    def test_get_repo_star(self):
-        self.assertEqual(self.executor.get_repo_star(), 6)
-
     def test_evaluate_repos(self):
         expect = [{
             'repo': 'https://github.com/ledermann/templatus-hotwire',
