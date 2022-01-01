@@ -28,5 +28,8 @@ class DepStarSortTest(unittest.TestCase):
         ]
         self.assertEqual(self.executor.evaluate_repos(5), expect)
 
+    def test_next_page_link(self):
+        self.assertEqual(self.executor.next_page_link(), "https://github.com/github/view_component/network/dependents?dependents_after=MTgzNjk2NDY2MDM")
+
 if __name__ == "__main__":
     unittest.main()

@@ -6,6 +6,9 @@ class DepStarSort:
     def __init__(self, github_url) -> None:
         self.github_url = github_url
         self.dep_url = f"{self.github_url}/network/dependents"
+
+    def next_page_link(self):
+        return(self.get_soup().find(attrs={"data-test-selector": "pagination"}).find('a')['href'])
     
     def evaluate_repos(self, min_star):
         result = []
