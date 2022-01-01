@@ -4,6 +4,10 @@ sys.path.append(os.path.join(os.path.dirname(__file__), '..', 'lib'))
 import dependency_page
 import md_formatter
 
+import configparser
+config_ini = configparser.ConfigParser()
+config_ini.read('config.ini', encoding='utf-8')
+
 class Dependencies:
     def __init__(self, github_url, min_star) -> None:
         self.github_url = github_url
@@ -17,7 +21,7 @@ class Dependencies:
             page = dependency_page.DependencyPage(min_star=self.min_star, url=url)
             result += page.popular_repos()
             url = page.next_page_link()
-        return(result)
+        return(sorted(result, key=lambda x:x[config_ini['DEFAULT']['Star']], reverse=True))
 
 if __name__ == "__main__":
     args = sys.argv
