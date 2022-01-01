@@ -17,5 +17,8 @@ class DepStarSortTest(unittest.TestCase):
     def test_get_repo_href(self):
         self.assertEqual(self.executor.get_repo_href(), "/ledermann/templatus-hotwire")
 
+    def test_get_repo_star(self):
+        self.assertEqual(self.executor.get_repo_star(), 6)
+
 if __name__ == "__main__":
     unittest.main()

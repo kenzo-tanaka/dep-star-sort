@@ -15,3 +15,8 @@ class DepStarSort:
         html = requests.get(self.dep_url())
         soup = BeautifulSoup(html.content, "html.parser")
         return(soup.find(class_="Box-row").find_all('a')[1]['href'])
+
+    def get_repo_star(self):
+        html = requests.get(self.dep_url())
+        soup = BeautifulSoup(html.content, "html.parser")
+        return(int(soup.find(class_="Box-row").find(class_='octicon-star').parent.text.replace('\n','').strip()))
