@@ -1,5 +1,8 @@
 import requests
 from bs4 import BeautifulSoup
+import configparser
+config_ini = configparser.ConfigParser()
+config_ini.read('config.ini', encoding='utf-8')
 
 class DependencyPage:
 	def __init__(self, url, min_star) -> None:
@@ -12,8 +15,8 @@ class DependencyPage:
 			if self.__star_count(box) >= self.min_star:
 				repositories.append(
 					{ 
-						'repo': self.__repository_url(box),
-						'star': self.__star_count(box) 
+						config_ini['DEFAULT']['Repository']: self.__repository_url(box),
+						config_ini['DEFAULT']['Star']: self.__star_count(box) 
 					}
 				)
 		return(repositories)

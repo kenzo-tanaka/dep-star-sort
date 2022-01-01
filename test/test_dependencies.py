@@ -9,6 +9,10 @@ import dependencies
 import dependency_page
 from bs4 import BeautifulSoup
 
+import configparser
+config_ini = configparser.ConfigParser()
+config_ini.read('config.ini', encoding='utf-8')
+
 class DependenciesTest(unittest.TestCase):
     def setUp(self) -> None:
       self.executor = dependencies.Dependencies(
@@ -31,12 +35,12 @@ class DependenciesTest(unittest.TestCase):
     def test_popular_repos(self):
         expect = [
             {
-                'repo': 'https://github.com/ledermann/templatus-hotwire',
-                'star': 6,
+                config_ini['DEFAULT']['Repository']: 'https://github.com/ledermann/templatus-hotwire',
+                config_ini['DEFAULT']['Star']: 6,
             },
             {
-                'repo': 'https://github.com/ParamagicDev/rails_starter',
-                'star': 5
+                config_ini['DEFAULT']['Repository']: 'https://github.com/ParamagicDev/rails_starter',
+                config_ini['DEFAULT']['Star']: 5
             }
         ]
         self.assertEqual(self.executor.popular_repos(), expect)

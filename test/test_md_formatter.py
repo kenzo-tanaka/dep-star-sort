@@ -7,16 +7,20 @@ import sys
 sys.path.append(os.path.join(os.path.dirname(__file__), '..', 'lib'))
 import md_formatter
 
+import configparser
+config_ini = configparser.ConfigParser()
+config_ini.read('config.ini', encoding='utf-8')
+
 class MdFormatterTest(unittest.TestCase):
   def setUp(self) -> None:
       array = [
         {
-          'repo': 'https://github.com/ledermann/templatus-hotwire',
-          'star': 6,
+          config_ini['DEFAULT']['Repository']: 'https://github.com/ledermann/templatus-hotwire',
+          config_ini['DEFAULT']['Star']: 6,
         },
         {
-          'repo': 'https://github.com/ParamagicDev/rails_starter',
-          'star': 5
+          config_ini['DEFAULT']['Repository']: 'https://github.com/ParamagicDev/rails_starter',
+          config_ini['DEFAULT']['Star']: 5
         }
       ]
       self.formatter = md_formatter.MdFormatter(array)
