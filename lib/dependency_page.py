@@ -19,10 +19,11 @@ class DependencyPage:
 		return(repositories)
 
 	def next_page_link(self):
-		if self.__prev_link_present():
-				return(self.__pagination_links()[1]['href'])
-		elif self.__only_next_link_present():
-				return(self.__pagination_links()[0]['href'])
+		page_links = self.__pagination_links()
+		if len(page_links) == 2:
+				return(page_links[1]['href'])
+		elif len(page_links) == 1 and page_links[0].text == 'Next':
+				return(page_links[0]['href'])
 		else:
 				return(None)
 		
