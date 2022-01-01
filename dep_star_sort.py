@@ -29,7 +29,7 @@ class DepStarSort:
         result = []
         for box in self.soup(url).find_all(class_="Box-row"):
             repo = 'https://github.com' + box.find_all('a')[1]['href']
-            star = int(box.find(class_='octicon-star').parent.text.replace('\n','').strip())
+            star = int(box.find(class_='octicon-star').parent.text.replace('\n','').replace(',', '').strip())
             if star >= self.min_star:
                 result.append(
                     {
