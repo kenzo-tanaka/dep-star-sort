@@ -17,7 +17,6 @@ class Dependencies:
             page = dependency_page.DependencyPage(min_star=self.min_star, url=url)
             result += page.popular_repos()
             url = page.next_page_link()
-            print(url)
         return(result)
 
 if __name__ == "__main__":
