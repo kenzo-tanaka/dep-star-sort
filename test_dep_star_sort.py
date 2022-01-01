@@ -23,7 +23,7 @@ class DepStarSortTest(unittest.TestCase):
             'repo': 'https://github.com/ledermann/templatus-hotwire',
             'star': 6,
         }]
-        self.assertEqual(self.executor.evaluate_repos(), expect)
+        self.assertEqual(self.executor.evaluate_repos(5), expect)
 
 if __name__ == "__main__":
     unittest.main()

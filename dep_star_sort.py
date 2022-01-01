@@ -8,12 +8,12 @@ class DepStarSort:
     def dep_url(self):
         return(f"{self.github_url}/network/dependents")
     
-    def evaluate_repos(self):
+    def evaluate_repos(self, min_star):
         result = []
         for box in self.get_soup().find_all(class_="Box-row"):
             repo = 'https://github.com' + box.find_all('a')[1]['href']
             star = int(box.find(class_='octicon-star').parent.text.replace('\n','').strip())
-            if star > 5:
+            if star > min_star:
                 result.append(
                     {
                         'repo': repo,
