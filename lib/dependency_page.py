@@ -17,6 +17,14 @@ class DependencyPage:
 					}
 				)
 		return(repositories)
+
+	def next_page_link(self):
+		if self.__prev_link_present():
+				return(self.__pagination_links()[1]['href'])
+		elif self.__only_next_link_present():
+				return(self.__pagination_links()[0]['href'])
+		else:
+				return(None)
 		
 	def soup(self):
 		html = requests.get(self.url)
@@ -30,3 +38,12 @@ class DependencyPage:
 	
 	def __repository_url(self, box):
 		return('https://github.com' + box.find_all('a')[1]['href'])
+
+	def __pagination_links(self):
+		return(self.soup().find(attrs={"data-test-selector": "pagination"}).find_all('a'))
+
+	def __prev_link_present(self):
+		return(len(self.__pagination_links()) == 2)
+
+	def __only_next_link_present(self):
+		return(len(self.__pagination_links()) == 1 and self.__pagination_links()[0].text == 'Next')

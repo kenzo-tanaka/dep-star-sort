@@ -32,6 +32,10 @@ class DependencyPageTest(unittest.TestCase):
             }
         ]
         self.assertEqual(self.dependency_page.popular_repos(), expect)
+    
+    @mock.patch("dependency_page.DependencyPage.soup", new=_mock_soup)
+    def test_next_page_link(self):
+        self.assertEqual(self.dependency_page.next_page_link(), "https://github.com/github/view_component/network/dependents?dependents_after=MTgzNjk2NDY2MDM")
 
 if __name__ == "__main__":
     unittest.main()
