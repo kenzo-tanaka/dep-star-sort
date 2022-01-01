@@ -10,15 +10,16 @@ import dependency_page
 
 class DependencyPageTest(unittest.TestCase):
     def setUp(self) -> None:
-        self.dependency_page = dependency_page.DependencyPage(url='https://github.com/github/view_component/network/dependents')
+        self.dependency_page = dependency_page.DependencyPage(url='https://github.com/github/view_component/network/dependents', min_star=5)
 
     def tearDown(self) -> None:
         pass
 
-    def _mock_soup(self, url):
+    def _mock_soup(self):
         with open('./test/index.html') as f:
             return(BeautifulSoup(f, "html.parser"))
 
+    @mock.patch("dependency_page.DependencyPage.soup", new=_mock_soup)
     def test_popular_repos(self):
         expect = [
             {
