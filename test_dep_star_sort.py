@@ -14,7 +14,7 @@ class DepStarSortTest(unittest.TestCase):
         pass
 
     def _mock_soup(self, url):
-        with open('index.html') as f:
+        with open('./test/index.html') as f:
             return(BeautifulSoup(f, "html.parser"))
 
     def _mock_next_page_link(self, url):
