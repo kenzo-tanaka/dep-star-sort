@@ -4,7 +4,7 @@ from unittest import mock
 # @see https://note.nkmk.me/python-relative-import/
 import os
 import sys
-sys.path.append(os.path.join(os.path.dirname(__file__), '..'))
+sys.path.append(os.path.join(os.path.dirname(__file__), '..', 'lib'))
 import dep_star_sort
 
 from bs4 import BeautifulSoup
