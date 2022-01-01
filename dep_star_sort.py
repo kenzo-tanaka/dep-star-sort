@@ -16,9 +16,9 @@ class DepStarSort:
         else:
             return(page_links[1]['href'])
     
-    def evaluate_repos(self, min_star):
+    def evaluate_repos(self, min_star, url):
         result = []
-        for box in self.soup(self.dep_url).find_all(class_="Box-row"):
+        for box in self.soup(url).find_all(class_="Box-row"):
             repo = 'https://github.com' + box.find_all('a')[1]['href']
             star = int(box.find(class_='octicon-star').parent.text.replace('\n','').strip())
             if star >= min_star:

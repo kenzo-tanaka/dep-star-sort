@@ -26,7 +26,7 @@ class DepStarSortTest(unittest.TestCase):
                 'star': 5
             }
         ]
-        self.assertEqual(self.executor.evaluate_repos(5), expect)
+        self.assertEqual(self.executor.evaluate_repos(min_star=5, url='https://github.com/github/view_component/network/dependents'), expect)
 
     @mock.patch("dep_star_sort.DepStarSort.soup", new=_mock_soup)
     def test_next_page_link(self):
