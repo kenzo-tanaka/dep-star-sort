@@ -30,7 +30,8 @@ class MdFormatterTest(unittest.TestCase):
 
   
   def test_display(self):
-    self.assertEqual(self.formatter.display(), 'foo')
+    expect = "- [ledermann/templatus-hotwire・star 6](https://github.com/ledermann/templatus-hotwire)\n- [ParamagicDev/rails_starter・star 5](https://github.com/ParamagicDev/rails_starter)\n"
+    self.assertEqual(self.formatter.display(), expect)
 
 if __name__ == "__main__":
   unittest.main()
