@@ -2,7 +2,7 @@ import sys
 import requests
 from bs4 import BeautifulSoup
 
-class DepStarSort:
+class Dependencies:
     def __init__(self, github_url, min_star) -> None:
         self.github_url = github_url
         self.dep_url = f"{self.github_url}/network/dependents"
@@ -49,5 +49,5 @@ class DepStarSort:
 
 if __name__ == "__main__":
     args = sys.argv
-    dep_star_sort = DepStarSort(github_url=args[1], min_star=int(args[2]))
-    print(dep_star_sort.popular_repos())
+    dependencies = Dependencies(github_url=args[1], min_star=int(args[2]))
+    print(dependencies.popular_repos())

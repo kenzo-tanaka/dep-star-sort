@@ -5,13 +5,13 @@ from unittest import mock
 import os
 import sys
 sys.path.append(os.path.join(os.path.dirname(__file__), '..', 'lib'))
-import dep_star_sort
+import dependencies
 
 from bs4 import BeautifulSoup
 
 class DepStarSortTest(unittest.TestCase):
     def setUp(self) -> None:
-      self.executor = dep_star_sort.DepStarSort(
+      self.executor = dependencies.Dependencies(
                         github_url="https://github.com/github/view_component",
                         min_star=5
                     )
@@ -26,7 +26,7 @@ class DepStarSortTest(unittest.TestCase):
     def _mock_next_page_link(self, url):
         return(None)
 
-    @mock.patch("dep_star_sort.DepStarSort.soup", new=_mock_soup)
+    @mock.patch("dependencies.Dependencies.soup", new=_mock_soup)
     def test_evaluate_repos(self):
         expect = [
             {
@@ -40,12 +40,12 @@ class DepStarSortTest(unittest.TestCase):
         ]
         self.assertEqual(self.executor.evaluate_repos(url='https://github.com/github/view_component/network/dependents'), expect)
 
-    @mock.patch("dep_star_sort.DepStarSort.soup", new=_mock_soup)
+    @mock.patch("dependencies.Dependencies.soup", new=_mock_soup)
     def test_next_page_link(self):
         self.assertEqual(self.executor.next_page_link(url='https://github.com/github/view_component/network/dependents'), "https://github.com/github/view_component/network/dependents?dependents_after=MTgzNjk2NDY2MDM")
     
-    @mock.patch("dep_star_sort.DepStarSort.soup", new=_mock_soup)
-    @mock.patch("dep_star_sort.DepStarSort.next_page_link", new=_mock_next_page_link)
+    @mock.patch("dependencies.Dependencies.soup", new=_mock_soup)
+    @mock.patch("dependencies.Dependencies.next_page_link", new=_mock_next_page_link)
     def test_popular_repos(self):
         expect = [
             {
