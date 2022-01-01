@@ -17,6 +17,14 @@ class DepStarSort:
     def get_repo_star(self):
         return(int(self.get_soup().find(class_="Box-row").find(class_='octicon-star').parent.text.replace('\n','').strip()))
 
+    def evaluate_repos(self):
+        expect = [{
+            'repo': 'https://github.com/ledermann/templatus-hotwire',
+            'star': 6,
+        }]
+        return(expect)
+
+    # TODO: private
     def get_soup(self):
         html = requests.get(self.dep_url())
         return(BeautifulSoup(html.content, "html.parser"))
