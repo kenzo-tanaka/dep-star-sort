@@ -10,10 +10,14 @@ import dependency_page
 
 class DependencyPageTest(unittest.TestCase):
     def setUp(self) -> None:
-        self.dependecy_page = dependency_page.DepedencyPage()
+        self.dependency_page = dependency_page.DependencyPage(url='https://github.com/github/view_component/network/dependents')
 
     def tearDown(self) -> None:
         pass
+
+    def _mock_soup(self, url):
+        with open('./test/index.html') as f:
+            return(BeautifulSoup(f, "html.parser"))
 
     def test_popular_repos(self):
         expect = [
@@ -26,7 +30,7 @@ class DependencyPageTest(unittest.TestCase):
                 'star': 5
             }
         ]
-        self.assertEqual(self.dependecy_page.popular_repos(), expect)
+        self.assertEqual(self.dependency_page.popular_repos(), expect)
 
 if __name__ == "__main__":
     unittest.main()

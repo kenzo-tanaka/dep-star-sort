@@ -1,4 +1,7 @@
-class DepedencyPage:
+class DependencyPage:
+	def __init__(self, url) -> None:
+			self.url = url
+
 	def popular_repos(self):
 		return(
 			[
