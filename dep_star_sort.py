@@ -18,12 +18,15 @@ class DepStarSort:
 
     def next_page_link(self, url):
         page_links = self.soup(url).find(attrs={"data-test-selector": "pagination"}).find_all('a')
-        # Nextリンクのみ
-        if len(page_links) == 1 and page_links[0].text == 'Next':
-            return(page_links[0]['href'])
-        # Prevリンクもある
-        else:
+        # Prev, Next リンクがある
+        if len(page_links) == 2:
             return(page_links[1]['href'])
+        # Nextリンクのみ
+        elif len(page_links) == 1 and page_links[0].text == 'Next':
+            return(page_links[0]['href'])
+        else:
+            return(None)
+            
     
     def evaluate_repos(self, url):
         result = []
