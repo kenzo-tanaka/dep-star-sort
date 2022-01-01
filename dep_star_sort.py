@@ -12,11 +12,11 @@ class DepStarSort:
         return(requests.get(self.dep_url()).status_code)
     
     def get_repo_href(self):
-        html = requests.get(self.dep_url())
-        soup = BeautifulSoup(html.content, "html.parser")
-        return(soup.find(class_="Box-row").find_all('a')[1]['href'])
+        return(self.__soup().find(class_="Box-row").find_all('a')[1]['href'])
 
     def get_repo_star(self):
+        return(int(self.__soup().find(class_="Box-row").find(class_='octicon-star').parent.text.replace('\n','').strip()))
+
+    def __soup(self):
         html = requests.get(self.dep_url())
-        soup = BeautifulSoup(html.content, "html.parser")
-        return(int(soup.find(class_="Box-row").find(class_='octicon-star').parent.text.replace('\n','').strip()))
+        return(BeautifulSoup(html.content, "html.parser"))
