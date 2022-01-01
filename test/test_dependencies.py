@@ -9,7 +9,7 @@ import dependencies
 
 from bs4 import BeautifulSoup
 
-class DepStarSortTest(unittest.TestCase):
+class DependenciesTest(unittest.TestCase):
     def setUp(self) -> None:
       self.executor = dependencies.Dependencies(
                         github_url="https://github.com/github/view_component",
