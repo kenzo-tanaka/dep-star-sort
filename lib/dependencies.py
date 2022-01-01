@@ -1,6 +1,7 @@
+import os
 import sys
-import requests
-from bs4 import BeautifulSoup
+sys.path.append(os.path.join(os.path.dirname(__file__), '..', 'lib'))
+import dependency_page
 
 class Dependencies:
     def __init__(self, github_url, min_star) -> None:
@@ -12,40 +13,9 @@ class Dependencies:
         url = self.dep_url
         result = []
         while url != None:
-            result += self.evaluate_repos(url)
-            url = self.next_page_link(url)
+            result += dependency_page.DependencyPage(min_star=self.min_star, url=url).popular_repos()
+            url = dependency_page.DependencyPage(min_star=self.min_star, url=url).next_page_link()
         return(result)
-
-    def next_page_link(self, url):
-        page_links = self.soup(url).find(attrs={"data-test-selector": "pagination"}).find_all('a')
-        # Prev, Next リンクがある
-        if len(page_links) == 2:
-            return(page_links[1]['href'])
-        # Nextリンクのみ
-        elif len(page_links) == 1 and page_links[0].text == 'Next':
-            return(page_links[0]['href'])
-        else:
-            return(None)
-            
-    
-    def evaluate_repos(self, url):
-        result = []
-        for box in self.soup(url).find_all(class_="Box-row"):
-            repo = 'https://github.com' + box.find_all('a')[1]['href']
-            star = int(box.find(class_='octicon-star').parent.text.replace('\n','').replace(',', '').strip())
-            if star >= self.min_star:
-                result.append(
-                    {
-                        'repo': repo,
-                        'star': star
-                    }
-                )
-        return(result)
-
-    # TODO: private
-    def soup(self, url):
-        html = requests.get(url)
-        return(BeautifulSoup(html.content, "html.parser"))
 
 if __name__ == "__main__":
     args = sys.argv
