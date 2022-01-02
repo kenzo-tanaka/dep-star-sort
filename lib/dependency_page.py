@@ -44,4 +44,4 @@ class DependencyPage:
 		return('https://github.com' + box.find_all('a')[1]['href'])
 
 	def __pagination_links(self):
-		return(self.soup().find(attrs={"data-test-selector": "pagination"}).find_all('a'))
+		return(self.soup().find(class_='paginate-container').find_all('a'))
