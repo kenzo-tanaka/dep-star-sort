@@ -45,9 +45,3 @@ class DependencyPage:
 
 	def __pagination_links(self):
 		return(self.soup().find(attrs={"data-test-selector": "pagination"}).find_all('a'))
-
-	def __prev_link_present(self):
-		return(len(self.__pagination_links()) == 2)
-
-	def __only_next_link_present(self):
-		return(len(self.__pagination_links()) == 1 and self.__pagination_links()[0].text == 'Next')
