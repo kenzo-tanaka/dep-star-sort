@@ -1,3 +1,4 @@
+import time
 import os
 import sys
 sys.path.append(os.path.join(os.path.dirname(__file__), '..', 'lib'))
@@ -21,6 +22,9 @@ class Dependencies:
             page = dependency_page.DependencyPage(min_star=self.min_star, url=url)
             result += page.popular_repos()
             url = page.next_page_link()
+
+            # 一定時間sleepしないとセレクターを検知できないことがある
+            time.sleep(5)
         return(sorted(result, key=lambda x:x[config_ini['DEFAULT']['Star']], reverse=True))
 
 if __name__ == "__main__":
