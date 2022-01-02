@@ -24,7 +24,7 @@ class Dependencies:
             url = page.next_page_link()
 
             # 一定時間sleepしないとセレクターを検知できないことがある
-            time.sleep(5)
+            time.sleep(1)
         return(sorted(result, key=lambda x:x[config_ini['DEFAULT']['Star']], reverse=True))
 
 if __name__ == "__main__":
